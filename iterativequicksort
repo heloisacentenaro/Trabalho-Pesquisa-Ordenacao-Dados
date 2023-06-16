@@ -1,0 +1,48 @@
+"""Algoritmo que faz a iteração do QuickSort"""
+
+def partition (lista, inicio, fim):
+    """Reponsável por criar a função do particionamento"""
+    i = inicio - 1
+    pivo = lista[fim]
+    for j in range(inicio, fim):
+        if  lista[j] <= pivo:
+            i = i + 1
+            lista[i], lista[j] = lista[j], lista[i]
+    lista[i + 1], lista[fim] = lista[fim], lista[i + 1]
+    print(lista)
+    print("Pivô: ", pivo)
+    return i + 1
+
+def quicksortiterative (vetor, inicio, fim):
+    """Função responsável por fazer o método de iteração no quicksort"""
+    tamanho = fim - inicio + 1
+    pilha = [0] * (tamanho)
+    top = -1
+    top = top + 1
+    pilha[top] = inicio
+    top = top + 1
+    pilha[top] = fim
+
+    while top >= 0:
+        fim = pilha[top]
+        top = top - 1
+        inicio = pilha[top]
+        top = top - 1
+        posicao_pivo = partition(vetor, inicio, fim)
+        if posicao_pivo-1 > inicio:
+            top = top + 1
+            pilha[top] = inicio
+            top = top + 1
+            pilha[top] = posicao_pivo - 1
+        if posicao_pivo + 1 < fim:
+            top = top + 1
+            pilha[top] = posicao_pivo + 1
+            top = top + 1
+            pilha[top] = fim
+arr = [50, 97, 0, 64, 6, 12, 15, 8, 5, 21, 32, 120, 47, 2]
+TAMANHO = len(arr)
+print("\n Vetor original: ", arr)
+print("\n")
+quicksortiterative(arr, 0, TAMANHO-1)
+print("\n Vetor ordenado: ", arr)
+print("\n")
