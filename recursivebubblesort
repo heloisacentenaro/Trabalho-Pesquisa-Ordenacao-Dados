@@ -1,0 +1,37 @@
+"""Algoritmo responsável por fazer a implementação de recursividade no Bubble Sort"""
+
+class BubbleSort:
+    """Classe para o algoritmo do Bubble Sort"""
+    def __init__(self, array):
+        self.array = array
+        self.tamanho = len(array)
+
+    def __str__(self):
+        return ", ".join([str(x) for x in self.array])
+    def bubblesortrecursive(self, fim=None):
+        """Função responsável por fazer a recursão no Bubble Sort"""
+        if fim is None:
+            fim = self.tamanho
+        count = 0
+        if fim == 1:
+            return
+        for i in range(fim - 1):
+            if self.array[i] > self.array[i + 1]:
+                self.array[i], self.array[i + 1] = self.array[i + 1], self.array[i]
+                count = count + 1
+                print(self.array)
+        if count == 0: #Trocas feitas
+            return
+        self.bubblesortrecursive(fim - 1)
+
+def main():
+    """Entrada para o programa principal"""
+    array = [93, 1, 22, 15, 10, 6, 12, 23, 5, 158]
+    print("\nVetor original: ", array)
+    print("----------------------------------------")
+    sort = BubbleSort(array)
+    sort.bubblesortrecursive()
+    print("----------------------------------------")
+    print("Vetor ordenado: ", sort)
+if __name__ == "__main__":
+    main()
